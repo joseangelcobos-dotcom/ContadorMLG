@@ -11,6 +11,7 @@
         --bg-card: #141b26;
         --corporate-blue: #0056b3; 
         --soft-blue: #3a86ff;
+        --success-green: #22c55e; /* Color verde para objetivos cumplidos */
         --gold: #d4af37;
         --silver: #aaa9ad;
         --bronze: #cd7f32;
@@ -61,6 +62,20 @@
         padding-bottom: 12px;
     }
 
+    /* --- CLASES DE ESTADO: OBJETIVO CUMPLIDO --- */
+    .goal-reached .team-val, 
+    .goal-reached .team-name,
+    .goal-reached .big-number,
+    .goal-reached .main-title {
+        color: var(--success-green) !important;
+        -webkit-text-fill-color: var(--success-green) !important; /* Para el degradado del centro */
+    }
+
+    .goal-reached .progress-fill {
+        background: var(--success-green) !important;
+        box-shadow: 0 0 25px rgba(34, 197, 94, 0.5) !important;
+    }
+
     /* --- RANKING --- */
     #ranking-list {
         overflow-y: auto;
@@ -104,7 +119,7 @@
         margin-bottom: 10px;
         box-shadow: 0 0 20px rgba(0, 86, 179, 0.4);
     }
-    .main-title { font-size: 3.2rem; font-weight: 800; margin: 0; letter-spacing: -1px; }
+    .main-title { font-size: 3.2rem; font-weight: 800; margin: 0; letter-spacing: -1px; transition: color 0.5s; }
     .big-number { 
         font-size: 15rem; 
         font-weight: 900; 
@@ -114,6 +129,7 @@
         background: linear-gradient(to bottom, #fff, #94a3b8);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        transition: color 0.5s;
     }
     
     .progress-box { width: 90%; margin-top: 10px; }
@@ -130,11 +146,10 @@
         background: linear-gradient(90deg, var(--corporate-blue), var(--soft-blue), #60a5fa); 
         height: 100%; 
         width: 0%; 
-        transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: width 2s cubic-bezier(0.22, 1, 0.36, 1), background 0.5s;
         box-shadow: 0 0 25px rgba(58, 134, 255, 0.5);
     }
 
-    /* Estilo Objetivos Gigantes */
     .goal-display {
         margin-top: 15px;
         padding: 15px 40px;
@@ -158,33 +173,25 @@
         transition: background 0.3s;
     }
     .team-unit:hover { background: rgba(255,255,255,0.04); }
-    .team-name { font-size: 1.6rem; font-weight: 800; color: var(--text-dim); display: block; }
-    .team-val { font-size: 6.5rem; font-weight: 900; color: var(--text-main); line-height: 1; }
+    .team-name { font-size: 1.6rem; font-weight: 800; color: var(--text-dim); display: block; transition: color 0.5s; }
+    .team-val { font-size: 6.5rem; font-weight: 900; color: var(--text-main); line-height: 1; transition: color 0.5s; }
     .team-meta { font-size: 1.3rem; font-weight: 700; color: var(--soft-blue); margin-top: 15px; display: block; }
     .team-meta span { font-size: 2.2rem; color: #fff; margin-left: 8px; font-weight: 900; }
 
     .small-bar { height: 16px; margin-top: 15px; border-radius: 8px; }
-
-    /* Personalización Scrollbar */
-    #ranking-list::-webkit-scrollbar { width: 6px; }
-    #ranking-list::-webkit-scrollbar-track { background: transparent; }
-    #ranking-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
 </style>
 </head>
 <body>
 
 <div class="dashboard-container">
-    <!-- RANKING DE VENTAS -->
     <div class="card">
         <div class="title-section">Ranking de Ventas</div>
-        <div id="ranking-list">
-            <!-- Los datos se inyectan aquí -->
-        </div>
+        <div id="ranking-list"></div>
     </div>
 
-    <!-- PANEL CENTRAL: MÁLAGA TOTAL -->
-    <div class="card center-card">
+    <!-- PANEL CENTRAL -->
+    <div id="container-total" class="card center-card">
         <div class="office-label">MONITOREO DE OBJETIVOS EN TIEMPO REAL</div>
         <h1 class="main-title">MÁLAGA TOTAL</h1>
         <div class="big-number" id="total-val">0</div>
@@ -204,53 +211,47 @@
         </div>
     </div>
 
-    <!-- PANEL DERECHO: EQUIPOS -->
+    <!-- PANEL DERECHO -->
     <div class="card" style="justify-content: center;">
         <div class="title-section">Rendimiento por Equipo</div>
         
         <!-- MÁLAGA 1 -->
-        <div class="team-unit">
+        <div id="unit-m1" class="team-unit">
             <span class="team-name">EQUIPO MÁLAGA 1</span>
             <span class="team-val" id="m1-val">0</span>
             <div class="progress-bg small-bar">
                 <div id="bar-m1" class="progress-fill"></div>
             </div>
-            <div class="team-meta">OBJETIVO: <span id="goal-m1">0</span></div>
+            <div class="team-meta">META: <span id="goal-m1">0</span></div>
         </div>
 
         <!-- MÁLAGA 3 -->
-        <div class="team-unit">
+        <div id="unit-m3" class="team-unit">
             <span class="team-name">EQUIPO MÁLAGA 3</span>
             <span class="team-val" id="m3-val">0</span>
             <div class="progress-bg small-bar">
                 <div id="bar-m3" class="progress-fill"></div>
             </div>
-            <div class="team-meta">OBJETIVO: <span id="goal-m3">0</span></div>
+            <div class="team-meta">META: <span id="goal-m3">0</span></div>
         </div>
     </div>
 </div>
 
 <script>
-// El script se mantiene idéntico para asegurar que la conexión con Google Sheets no se pierda
 const sheetID = '1YjHq1RPcu9OQfPIGZJvzhE0a8PlEi4aaRPrgUoiE0no'; 
 const url = `https://docs.google.com/spreadsheets/d/${sheetID}/export?format=csv&gid=0`;
 
 async function updateDashboard() {
     try {
         const response = await fetch(url + '&t=' + new Date().getTime());
-        if (!response.ok) {
-            console.error('Error al acceder al archivo. Verifica permisos de compartir.');
-            return;
-        }
+        if (!response.ok) return;
         
         const csv = await response.text();
-        const rows = csv.split(/\r?\n/).map(row => {
-            return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-        });
+        const rows = csv.split(/\r?\n/).map(row => row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
 
         if (rows.length < 2) return;
 
-        // 1. Lógica del Ranking
+        // --- 1. Ranking ---
         let comerciales = [];
         for(let i = 1; i < rows.length; i++) {
             let nombre = rows[i][1] ? rows[i][1].replace(/"/g, "").trim() : "";
@@ -269,35 +270,46 @@ async function updateDashboard() {
         });
         document.getElementById('ranking-list').innerHTML = rankingHtml;
 
-        // 2. Lógica Málaga Total
+        // --- 2. Málaga Total ---
         const total = parseInt(rows[1][4]) || 0;
         const goalT = parseInt(rows[1][7]) || 1;
         document.getElementById('total-val').innerText = total;
         document.getElementById('goal-total').innerText = goalT;
+        
         let pTotal = Math.min((total/goalT)*100, 100);
         document.getElementById('bar-total').style.width = pTotal + '%';
         document.getElementById('percent-total').innerText = Math.round(pTotal) + '%';
+        
+        // Cambio de color Málaga Total
+        if (total >= goalT) {
+            document.getElementById('container-total').classList.add('goal-reached');
+        } else {
+            document.getElementById('container-total').classList.remove('goal-reached');
+        }
 
-        // 3. Lógica Equipos
+        // --- 3. Equipos ---
         const m1 = parseInt(rows[1][6]) || 0;
         const gM1 = parseInt(rows[2][7]) || 1;
         const m3 = parseInt(rows[2][6]) || 0;
         const gM3 = parseInt(rows[3][7]) || 1;
 
+        // M1
         document.getElementById('m1-val').innerText = m1;
         document.getElementById('goal-m1').innerText = gM1;
         document.getElementById('bar-m1').style.width = Math.min((m1/gM1)*100, 100) + '%';
+        if (m1 >= gM1) document.getElementById('unit-m1').classList.add('goal-reached');
+        else document.getElementById('unit-m1').classList.remove('goal-reached');
 
+        // M3
         document.getElementById('m3-val').innerText = m3;
         document.getElementById('goal-m3').innerText = gM3;
         document.getElementById('bar-m3').style.width = Math.min((m3/gM3)*100, 100) + '%';
+        if (m3 >= gM3) document.getElementById('unit-m3').classList.add('goal-reached');
+        else document.getElementById('unit-m3').classList.remove('goal-reached');
 
-    } catch (e) { 
-        console.error("Error crítico en el script: ", e); 
-    }
+    } catch (e) { console.error(e); }
 }
 
-// Actualización cada 3 segundos
 setInterval(updateDashboard, 3000);
 updateDashboard();
 </script>

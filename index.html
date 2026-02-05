@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Comercial - Málaga</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
     <style>
@@ -35,170 +36,226 @@
         gap: 20px;
         padding: 25px;
         flex-grow: 1;
+        height: calc(100vh - 50px);
     }
 
     .card {
         background: var(--bg-card);
-        border-radius: 12px;
+        border-radius: 20px;
         padding: 30px;
         border: 1px solid var(--border);
         display: flex;
         flex-direction: column;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        position: relative;
     }
 
     .title-section {
         font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--text-dim);
+        font-weight: 800;
+        color: var(--soft-blue);
         text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 25px;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
         border-bottom: 1px solid var(--border);
-        padding-bottom: 10px;
+        padding-bottom: 12px;
     }
 
-    /* --- RANKING DESTACADO --- */
+    /* --- RANKING --- */
+    #ranking-list {
+        overflow-y: auto;
+        padding-right: 5px;
+    }
     .ranking-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 15px;
-        background: rgba(255,255,255,0.02);
-        border-radius: 8px;
-        margin-bottom: 8px;
+        padding: 14px 18px;
+        background: rgba(255,255,255,0.03);
+        border-radius: 12px;
+        margin-bottom: 10px;
         border: 1px solid transparent;
+        transition: transform 0.2s;
     }
-
-    /* TOP 3: Estilos Especiales */
     .ranking-item:nth-child(1) { 
-        background: rgba(0, 86, 179, 0.2); 
+        background: linear-gradient(90deg, rgba(0, 86, 179, 0.4), rgba(20, 27, 38, 1)); 
         border: 1px solid var(--corporate-blue);
-        padding: 18px 15px;
+        transform: scale(1.02);
     }
-    .ranking-item:nth-child(1) .name { color: #fff; font-size: 1.5rem; font-weight: 800; }
+    .ranking-item:nth-child(1) .name { color: #fff; font-size: 1.4rem; font-weight: 800; }
     .ranking-item:nth-child(1) .val { color: var(--soft-blue); font-size: 1.8rem; }
 
-    .ranking-item:nth-child(2) { 
-        background: rgba(255, 255, 255, 0.05); 
-        border-left: 4px solid var(--silver);
-    }
-    .ranking-item:nth-child(2) .name { font-size: 1.35rem; font-weight: 700; }
-
-    .ranking-item:nth-child(3) { 
-        background: rgba(255, 255, 255, 0.03); 
-        border-left: 4px solid var(--bronze);
-    }
-    .ranking-item:nth-child(3) .name { font-size: 1.25rem; font-weight: 700; }
-
     .name { font-weight: 500; font-size: 1.1rem; color: var(--text-dim); }
-    .val { font-weight: 800; color: var(--text-main); font-size: 1.2rem; }
+    .val { font-weight: 800; color: var(--text-main); font-size: 1.3rem; }
 
     /* --- CENTRO --- */
-    .center-card { justify-content: center; align-items: center; text-align: center; }
-    .office-label { background: var(--corporate-blue); padding: 6px 20px; border-radius: 4px; font-size: 0.8rem; font-weight: 800; margin-bottom: 15px; }
-    .main-title { font-size: 3.5rem; font-weight: 800; margin: 0; color: var(--text-main); }
-    .big-number { font-size: 16rem; font-weight: 900; line-height: 0.9; margin: 20px 0; }
+    .center-card { 
+        justify-content: center; 
+        align-items: center; 
+        text-align: center;
+        background: radial-gradient(circle at center, #1c2636 0%, #141b26 100%);
+    }
+    .office-label { 
+        background: var(--corporate-blue); 
+        padding: 8px 25px; 
+        border-radius: 50px; 
+        font-size: 0.8rem; 
+        font-weight: 800; 
+        margin-bottom: 10px;
+        box-shadow: 0 0 20px rgba(0, 86, 179, 0.4);
+    }
+    .main-title { font-size: 3.2rem; font-weight: 800; margin: 0; letter-spacing: -1px; }
+    .big-number { 
+        font-size: 15rem; 
+        font-weight: 900; 
+        line-height: 0.8; 
+        margin: 15px 0;
+        text-shadow: 0 0 60px rgba(58, 134, 255, 0.4);
+        background: linear-gradient(to bottom, #fff, #94a3b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
     
-    .progress-box { width: 80%; margin-top: 20px; }
-    .progress-bg { background: #1e2530; height: 18px; border-radius: 10px; overflow: hidden; margin: 10px 0; }
-    .progress-fill { background: var(--corporate-blue); height: 100%; width: 0%; transition: width 1.5s ease-in-out; }
+    .progress-box { width: 90%; margin-top: 10px; }
+    .progress-bg { 
+        background: #0a0e14; 
+        height: 32px; 
+        border-radius: 16px; 
+        overflow: hidden; 
+        margin: 15px 0;
+        border: 1px solid var(--border);
+        box-shadow: inset 0 2px 15px rgba(0,0,0,0.7);
+    }
+    .progress-fill { 
+        background: linear-gradient(90deg, var(--corporate-blue), var(--soft-blue), #60a5fa); 
+        height: 100%; 
+        width: 0%; 
+        transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
+        box-shadow: 0 0 25px rgba(58, 134, 255, 0.5);
+    }
 
-    /* --- DERECHA --- */
-    .team-unit { margin-bottom: 40px; text-align: center; }
-    .team-name { font-size: 1.8rem; font-weight: 700; color: var(--text-dim); }
-    .team-val { font-size: 6rem; font-weight: 800; color: var(--text-main); display: block; }
-    .goal-info { font-size: 0.9rem; color: var(--text-dim); }
+    /* Estilo Objetivos Gigantes */
+    .goal-display {
+        margin-top: 15px;
+        padding: 15px 40px;
+        background: rgba(58, 134, 255, 0.1);
+        border-radius: 20px;
+        border: 2px dashed var(--soft-blue);
+        display: inline-block;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    }
+    .goal-label { font-size: 1.2rem; color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+    .goal-value { font-size: 3.5rem; font-weight: 900; color: #fff; margin-left: 15px; vertical-align: middle; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
+    /* --- EQUIPOS (DERECHA) --- */
+    .team-unit { 
+        margin-bottom: 20px; 
+        text-align: center; 
+        padding: 25px;
+        background: rgba(255,255,255,0.02);
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.05);
+        transition: background 0.3s;
+    }
+    .team-unit:hover { background: rgba(255,255,255,0.04); }
+    .team-name { font-size: 1.6rem; font-weight: 800; color: var(--text-dim); display: block; }
+    .team-val { font-size: 6.5rem; font-weight: 900; color: var(--text-main); line-height: 1; }
+    .team-meta { font-size: 1.3rem; font-weight: 700; color: var(--soft-blue); margin-top: 15px; display: block; }
+    .team-meta span { font-size: 2.2rem; color: #fff; margin-left: 8px; font-weight: 900; }
+
+    .small-bar { height: 16px; margin-top: 15px; border-radius: 8px; }
+
+    /* Personalización Scrollbar */
+    #ranking-list::-webkit-scrollbar { width: 6px; }
+    #ranking-list::-webkit-scrollbar-track { background: transparent; }
+    #ranking-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
 </style>
 </head>
 <body>
 
 <div class="dashboard-container">
+    <!-- RANKING DE VENTAS -->
     <div class="card">
         <div class="title-section">Ranking de Ventas</div>
         <div id="ranking-list">
-            </div>
+            <!-- Los datos se inyectan aquí -->
+        </div>
     </div>
 
+    <!-- PANEL CENTRAL: MÁLAGA TOTAL -->
     <div class="card center-card">
-        <div class="office-label">DASHBOARD OFICIAL</div>
+        <div class="office-label">MONITOREO DE OBJETIVOS EN TIEMPO REAL</div>
         <h1 class="main-title">MÁLAGA TOTAL</h1>
         <div class="big-number" id="total-val">0</div>
         
         <div class="progress-box">
-            <div style="display: flex; justify-content: space-between; font-weight: 600;">
-                <span>PROGRESO</span>
-                <span id="percent-total">0%</span>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; font-weight: 800;">
+                <span style="font-size: 1.1rem; color: var(--text-dim); letter-spacing: 1px;">RENDIMIENTO DE OFICINA</span>
+                <span id="percent-total" style="font-size: 2.5rem; color: var(--soft-blue);">0%</span>
             </div>
             <div class="progress-bg">
                 <div id="bar-total" class="progress-fill"></div>
             </div>
-            <div class="goal-info">OBJETIVO DE OFICINA: <span id="goal-total" style="color:white">0</span></div>
+            <div class="goal-display">
+                <span class="goal-label">OBJETIVO:</span>
+                <span class="goal-value" id="goal-total">0</span>
+            </div>
         </div>
     </div>
 
+    <!-- PANEL DERECHO: EQUIPOS -->
     <div class="card" style="justify-content: center;">
         <div class="title-section">Rendimiento por Equipo</div>
         
+        <!-- MÁLAGA 1 -->
         <div class="team-unit">
-            <span class="team-name">MÁLAGA 1</span>
+            <span class="team-name">EQUIPO MÁLAGA 1</span>
             <span class="team-val" id="m1-val">0</span>
-            <div class="progress-bg" style="height: 8px; width: 70%; margin: 10px auto;">
+            <div class="progress-bg small-bar">
                 <div id="bar-m1" class="progress-fill"></div>
             </div>
-            <span class="goal-info">META: <span id="goal-m1">0</span></span>
+            <div class="team-meta">OBJETIVO: <span id="goal-m1">0</span></div>
         </div>
 
+        <!-- MÁLAGA 3 -->
         <div class="team-unit">
-            <span class="team-name">MÁLAGA 3</span>
+            <span class="team-name">EQUIPO MÁLAGA 3</span>
             <span class="team-val" id="m3-val">0</span>
-            <div class="progress-bg" style="height: 8px; width: 70%; margin: 10px auto;">
+            <div class="progress-bg small-bar">
                 <div id="bar-m3" class="progress-fill"></div>
             </div>
-            <span class="goal-info">META: <span id="goal-m3">0</span></span>
+            <div class="team-meta">OBJETIVO: <span id="goal-m3">0</span></div>
         </div>
     </div>
 </div>
 
 <script>
-// Asegúrate de que este es el ID que ves en la barra de tu navegador
+// El script se mantiene idéntico para asegurar que la conexión con Google Sheets no se pierda
 const sheetID = '1YjHq1RPcu9OQfPIGZJvzhE0a8PlEi4aaRPrgUoiE0no'; 
 const url = `https://docs.google.com/spreadsheets/d/${sheetID}/export?format=csv&gid=0`;
 
 async function updateDashboard() {
     try {
         const response = await fetch(url + '&t=' + new Date().getTime());
-        
         if (!response.ok) {
             console.error('Error al acceder al archivo. Verifica permisos de compartir.');
             return;
         }
         
         const csv = await response.text();
-        console.log("Datos recibidos:", csv); // Esto te mostrará en la consola qué está leyendo
-
-        // Usamos una expresión regular más robusta para separar filas y comas
         const rows = csv.split(/\r?\n/).map(row => {
-            // Esto ayuda a manejar nombres que puedan contener comas internas
             return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
         });
 
-        if (rows.length < 2) {
-            console.warn("El archivo parece estar vacío o mal formateado");
-            return;
-        }
+        if (rows.length < 2) return;
 
-        // --- LÓGICA DE ACTUALIZACIÓN ---
-
-        // 1. Ranking de Comerciales (Columnas B y C -> Índices 1 y 2)
+        // 1. Lógica del Ranking
         let comerciales = [];
         for(let i = 1; i < rows.length; i++) {
             let nombre = rows[i][1] ? rows[i][1].replace(/"/g, "").trim() : "";
             let valor = parseInt(rows[i][2]) || 0;
-            
-            if(nombre !== "") {
-                comerciales.push({ nombre, valor });
-            }
+            if(nombre !== "") comerciales.push({ nombre, valor });
         }
         comerciales.sort((a, b) => b.valor - a.valor);
 
@@ -212,22 +269,20 @@ async function updateDashboard() {
         });
         document.getElementById('ranking-list').innerHTML = rankingHtml;
 
-        // 2. Oficina Málaga (Fila 2, Col E y H -> Índices [1][4] y [1][7])
+        // 2. Lógica Málaga Total
         const total = parseInt(rows[1][4]) || 0;
         const goalT = parseInt(rows[1][7]) || 1;
-        
         document.getElementById('total-val').innerText = total;
         document.getElementById('goal-total').innerText = goalT;
         let pTotal = Math.min((total/goalT)*100, 100);
         document.getElementById('bar-total').style.width = pTotal + '%';
         document.getElementById('percent-total').innerText = Math.round(pTotal) + '%';
 
-        // 3. Equipos (M1: [1][6] y [1][7] | M3: [2][6] y [2][7])
-        // Ajustamos los índices para asegurar que apunten a las filas correctas
+        // 3. Lógica Equipos
         const m1 = parseInt(rows[1][6]) || 0;
-        const gM1 = parseInt(rows[2][7]) || 1; // Objetivo M1 en H3
+        const gM1 = parseInt(rows[2][7]) || 1;
         const m3 = parseInt(rows[2][6]) || 0;
-        const gM3 = parseInt(rows[3][7]) || 1; // Objetivo M3 en H4
+        const gM3 = parseInt(rows[3][7]) || 1;
 
         document.getElementById('m1-val').innerText = m1;
         document.getElementById('goal-m1').innerText = gM1;
@@ -242,9 +297,9 @@ async function updateDashboard() {
     }
 }
 
+// Actualización cada 3 segundos
 setInterval(updateDashboard, 3000);
 updateDashboard();
 </script>
-
 </body>
 </html>

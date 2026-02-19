@@ -111,13 +111,18 @@
         background: radial-gradient(circle at center, #1c2636 0%, #141b26 100%);
     }
     .office-label { 
-        background: var(--corporate-blue); 
-        padding: 8px 25px; 
+       
+        & img { width: 320px;
+            padding: 2rem;
+            border-radius: 50px;
+        }
+
+    
         border-radius: 50px; 
         font-size: 0.8rem; 
         font-weight: 800; 
-        margin-bottom: 10px;
-        box-shadow: 0 0 20px rgba(0, 86, 179, 0.4);
+        
+        
     }
     .main-title { font-size: 3.2rem; font-weight: 800; margin: 0; letter-spacing: -1px; transition: color 0.5s; }
     .big-number { 
@@ -192,7 +197,7 @@
 
     <!-- PANEL CENTRAL -->
     <div id="container-total" class="card center-card">
-        <div class="office-label">MONITOREO DE OBJETIVOS EN TIEMPO REAL</div>
+        <div class="office-label"><img src="banner Selectra.jpg" alt="Selectra Banner"></div>
         <h1 class="main-title">MÁLAGA TOTAL</h1>
         <div class="big-number" id="total-val">0</div>
         

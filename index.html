@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Comercial - Málaga</title>
@@ -104,7 +103,7 @@
     </div>
 
     <div id="container-total" class="card center-card">
-        <img src="banner Selectra.jpg" alt="Banner" style="width: 100%; border-radius: 15px; margin-bottom: 20px; max-height: 300px; max-width: 300px">
+        <img src="banner Selectra.jpg" alt="Banner" style="width: 100%; border-radius: 15px; margin-bottom: 20px; max-height: 300px; max-width: 300px;" >
         <h1 class="main-title">MÁLAGA TOTAL</h1>
         <div class="big-number" id="total-val">0</div>
         
@@ -141,7 +140,7 @@
 </div>
 
 <script>
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzrY52wAmDBPVPr3mLHHZ5M_S0N6nWoSxBwCS6-YwilMhLFbBHuLtO63_oDNOsiN5TiwA/exec'; 
+const scriptURL = 'https://script.google.com/macros/s/AKfycbye7zr4iQ6-VQyM7lucWu7gz5ga331g8jXgHdRR2Iu0G52Pg_bxVTFv_VR_o-HNZMEYiA/exec'; 
 
 async function updateDashboard() {
     try {
@@ -187,7 +186,7 @@ async function updateDashboard() {
     } catch (e) { console.error("Error:", e); }
 }
 
-setInterval(updateDashboard, 30000);
+setInterval(updateDashboard, 20000);
 updateDashboard();
 </script>
 </body>

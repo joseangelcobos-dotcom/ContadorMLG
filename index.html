@@ -11,10 +11,7 @@
         --bg-card: #141b26;
         --corporate-blue: #0056b3; 
         --soft-blue: #3a86ff;
-        --success-green: #22c55e; /* Color verde para objetivos cumplidos */
-        --gold: #d4af37;
-        --silver: #aaa9ad;
-        --bronze: #cd7f32;
+        --success-green: #22c55e;
         --text-main: #ffffff;
         --text-dim: #94a3b8;
         --border: #2d3748;
@@ -48,7 +45,6 @@
         display: flex;
         flex-direction: column;
         box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-        position: relative;
     }
 
     .title-section {
@@ -62,13 +58,9 @@
         padding-bottom: 12px;
     }
 
-    /* --- CLASES DE ESTADO: OBJETIVO CUMPLIDO --- */
-    .goal-reached .team-val, 
-    .goal-reached .team-name,
-    .goal-reached .big-number,
-    .goal-reached .main-title {
+    .goal-reached .team-val, .goal-reached .big-number, .goal-reached .main-title {
         color: var(--success-green) !important;
-        -webkit-text-fill-color: var(--success-green) !important; /* Para el degradado del centro */
+        -webkit-text-fill-color: var(--success-green) !important;
     }
 
     .goal-reached .progress-fill {
@@ -76,246 +68,125 @@
         box-shadow: 0 0 25px rgba(34, 197, 94, 0.5) !important;
     }
 
-    /* --- RANKING --- */
-    #ranking-list {
-        overflow-y: auto;
-        padding-right: 5px;
-    }
+    #ranking-list { overflow-y: auto; }
     .ranking-item {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        padding: 14px 18px;
+        padding: 12px 15px;
         background: rgba(255,255,255,0.03);
-        border-radius: 12px;
-        margin-bottom: 10px;
-        border: 1px solid transparent;
-        transition: transform 0.2s;
+        border-radius: 10px;
+        margin-bottom: 8px;
     }
-    .ranking-item:nth-child(1) { 
-        background: linear-gradient(90deg, rgba(0, 86, 179, 0.4), rgba(20, 27, 38, 1)); 
-        border: 1px solid var(--corporate-blue);
-        transform: scale(1.02);
-    }
-    .ranking-item:nth-child(1) .name { color: #fff; font-size: 1.4rem; font-weight: 800; }
-    .ranking-item:nth-child(1) .val { color: var(--soft-blue); font-size: 1.8rem; }
+    .ranking-item:first-child { border: 1px solid var(--corporate-blue); background: rgba(0, 86, 179, 0.2); }
 
-    .name { font-weight: 500; font-size: 1.1rem; color: var(--text-dim); }
-    .val { font-weight: 800; color: var(--text-main); font-size: 1.3rem; }
-
-    /* --- CENTRO --- */
-    .center-card { 
-        justify-content: center; 
-        align-items: center; 
-        text-align: center;
-        background: radial-gradient(circle at center, #1c2636 0%, #141b26 100%);
-    }
-    .office-label { 
-       
-        & img { width: 320px;
-            padding: 2rem;
-            border-radius: 50px;
-        }
-
+    .center-card { justify-content: center; align-items: center; text-align: center; }
+    .main-title { font-size: 3rem; font-weight: 800; margin: 0; }
+    .big-number { font-size: 14rem; font-weight: 900; line-height: 0.8; margin: 20px 0; background: linear-gradient(to bottom, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     
-        border-radius: 50px; 
-        font-size: 0.8rem; 
-        font-weight: 800; 
-        
-        
-    }
-    .main-title { font-size: 3.2rem; font-weight: 800; margin: 0; letter-spacing: -1px; transition: color 0.5s; }
-    .big-number { 
-        font-size: 15rem; 
-        font-weight: 900; 
-        line-height: 0.8; 
-        margin: 15px 0;
-        text-shadow: 0 0 60px rgba(58, 134, 255, 0.4);
-        background: linear-gradient(to bottom, #fff, #94a3b8);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        transition: color 0.5s;
-    }
-    
-    .progress-box { width: 90%; margin-top: 10px; }
-    .progress-bg { 
-        background: #0a0e14; 
-        height: 32px; 
-        border-radius: 16px; 
-        overflow: hidden; 
-        margin: 15px 0;
-        border: 1px solid var(--border);
-        box-shadow: inset 0 2px 15px rgba(0,0,0,0.7);
-    }
-    .progress-fill { 
-        background: linear-gradient(90deg, var(--corporate-blue), var(--soft-blue), #60a5fa); 
-        height: 100%; 
-        width: 0%; 
-        transition: width 2s cubic-bezier(0.22, 1, 0.36, 1), background 0.5s;
-        box-shadow: 0 0 25px rgba(58, 134, 255, 0.5);
-    }
+    .progress-bg { background: #0a0e14; height: 30px; border-radius: 15px; overflow: hidden; width: 100%; margin: 15px 0; border: 1px solid var(--border); }
+    .progress-fill { background: linear-gradient(90deg, var(--corporate-blue), var(--soft-blue)); height: 100%; width: 0%; transition: width 2s ease; }
 
-    .goal-display {
-        margin-top: 15px;
-        padding: 15px 40px;
-        background: rgba(58, 134, 255, 0.1);
-        border-radius: 20px;
-        border: 2px dashed var(--soft-blue);
-        display: inline-block;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-    }
-    .goal-label { font-size: 1.2rem; color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
-    .goal-value { font-size: 3.5rem; font-weight: 900; color: #fff; margin-left: 15px; vertical-align: middle; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+    .goal-display { margin-top: 10px; padding: 10px 30px; background: rgba(58, 134, 255, 0.1); border-radius: 15px; border: 2px dashed var(--soft-blue); }
+    .goal-value { font-size: 3rem; font-weight: 900; margin-left: 10px; }
 
-    /* --- EQUIPOS (DERECHA) --- */
-    .team-unit { 
-        margin-bottom: 20px; 
-        text-align: center; 
-        padding: 25px;
-        background: rgba(255,255,255,0.02);
-        border-radius: 20px;
-        border: 1px solid rgba(255,255,255,0.05);
-        transition: background 0.3s;
-    }
-    .team-unit:hover { background: rgba(255,255,255,0.04); }
-    .team-name { font-size: 1.6rem; font-weight: 800; color: var(--text-dim); display: block; transition: color 0.5s; }
-    .team-val { font-size: 6.5rem; font-weight: 900; color: var(--text-main); line-height: 1; transition: color 0.5s; }
-    .team-meta { font-size: 1.3rem; font-weight: 700; color: var(--soft-blue); margin-top: 15px; display: block; }
-    .team-meta span { font-size: 2.2rem; color: #fff; margin-left: 8px; font-weight: 900; }
-
-    .small-bar { height: 16px; margin-top: 15px; border-radius: 8px; }
-
-</style>
+    .team-unit { margin-bottom: 20px; text-align: center; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 15px; }
+    .team-val { font-size: 5rem; font-weight: 900; line-height: 1; }
+    .team-meta { color: var(--soft-blue); font-weight: bold; margin-top: 10px; }
+    </style>
 </head>
 <body>
 
 <div class="dashboard-container">
     <div class="card">
-        <div class="title-section">Ranking de Ventas</div>
+        <div class="title-section">Ranking Agentes</div>
         <div id="ranking-list"></div>
     </div>
 
-    <!-- PANEL CENTRAL -->
     <div id="container-total" class="card center-card">
-        <div class="office-label"><img src="banner Selectra.jpg" alt="Selectra Banner"></div>
+        <img src="banner Selectra.jpg" alt="Banner" style="width: 100%; border-radius: 15px; margin-bottom: 20px;">
         <h1 class="main-title">MÁLAGA TOTAL</h1>
         <div class="big-number" id="total-val">0</div>
         
-        <div class="progress-box">
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; font-weight: 800;">
-                <span style="font-size: 1.1rem; color: var(--text-dim); letter-spacing: 1px;">RENDIMIENTO DE OFICINA</span>
-                <span id="percent-total" style="font-size: 2.5rem; color: var(--soft-blue);">0%</span>
+        <div style="width: 80%;">
+            <div style="display: flex; justify-content: space-between; font-weight: 800;">
+                <span style="color: var(--text-dim);">PROGRESO</span>
+                <span id="percent-total" style="color: var(--soft-blue);">0%</span>
             </div>
             <div class="progress-bg">
                 <div id="bar-total" class="progress-fill"></div>
             </div>
             <div class="goal-display">
-                <span class="goal-label">OBJETIVO:</span>
+                <span>OBJETIVO:</span>
                 <span class="goal-value" id="goal-total">0</span>
             </div>
         </div>
     </div>
 
-    <!-- PANEL DERECHO -->
     <div class="card" style="justify-content: center;">
-        <div class="title-section">Rendimiento por Equipo</div>
-        
-        <!-- MÁLAGA 1 -->
+        <div class="title-section">Equipos</div>
         <div id="unit-m1" class="team-unit">
-            <span class="team-name">EQUIPO MÁLAGA 1</span>
-            <span class="team-val" id="m1-val">0</span>
-            <div class="progress-bg small-bar">
-                <div id="bar-m1" class="progress-fill"></div>
-            </div>
-            <div class="team-meta">OBJETIVO: <span id="goal-m1">0</span></div>
+            <span style="font-weight: 800;">EQUIPO M1</span>
+            <div class="team-val" id="m1-val">0</div>
+            <div class="progress-bg" style="height: 10px;"><div id="bar-m1" class="progress-fill"></div></div>
+            <div class="team-meta">META: <span id="goal-m1">0</span></div>
         </div>
-
-        <!-- MÁLAGA 3 -->
         <div id="unit-m3" class="team-unit">
-            <span class="team-name">EQUIPO MÁLAGA 3</span>
-            <span class="team-val" id="m3-val">0</span>
-            <div class="progress-bg small-bar">
-                <div id="bar-m3" class="progress-fill"></div>
-            </div>
-            <div class="team-meta">OBJETIVO: <span id="goal-m3">0</span></div>
+            <span style="font-weight: 800;">EQUIPO M3</span>
+            <div class="team-val" id="m3-val">0</div>
+            <div class="progress-bg" style="height: 10px;"><div id="bar-m3" class="progress-fill"></div></div>
+            <div class="team-meta">META: <span id="goal-m3">0</span></div>
         </div>
     </div>
 </div>
 
 <script>
-const sheetID = '1YjHq1RPcu9OQfPIGZJvzhE0a8PlEi4aaRPrgUoiE0no'; 
-const url = `https://docs.google.com/spreadsheets/d/${sheetID}/export?format=csv&gid=0`;
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzrY52wAmDBPVPr3mLHHZ5M_S0N6nWoSxBwCS6-YwilMhLFbBHuLtO63_oDNOsiN5TiwA/exec'; 
 
 async function updateDashboard() {
     try {
-        const response = await fetch(url + '&t=' + new Date().getTime());
-        if (!response.ok) return;
+        const response = await fetch(scriptURL);
+        const data = await response.json();
         
-        const csv = await response.text();
-        const rows = csv.split(/\r?\n/).map(row => row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
-
-        if (rows.length < 2) return;
-
-        // --- 1. Ranking ---
-        let comerciales = [];
-        for(let i = 1; i < rows.length; i++) {
-            let nombre = rows[i][1] ? rows[i][1].replace(/"/g, "").trim() : "";
-            let valor = parseInt(rows[i][2]) || 0;
-            if(nombre !== "") comerciales.push({ nombre, valor });
-        }
-        comerciales.sort((a, b) => b.valor - a.valor);
-
+        // 1. Ranking
         let rankingHtml = '';
-        comerciales.forEach((c, index) => {
-            rankingHtml += `
-                <div class="ranking-item">
-                    <span class="name">#${index+1} ${c.nombre}</span>
-                    <span class="val">${c.valor}</span>
-                </div>`;
+        data.comerciales.sort((a,b) => b.valor - a.valor).forEach((c, i) => {
+            if(c.valor > 0) {
+                rankingHtml += `<div class="ranking-item"><span>#${i+1} ${c.nombre}</span><b>${c.valor}</b></div>`;
+            }
         });
         document.getElementById('ranking-list').innerHTML = rankingHtml;
 
-        // --- 2. Málaga Total ---
-        const total = parseInt(rows[1][4]) || 0;
-        const goalT = parseInt(rows[1][7]) || 1;
+        // 2. Total
+        const total = parseInt(data.total) || 0;
+        const goalT = parseInt(data.objetivoTotal) || 1;
         document.getElementById('total-val').innerText = total;
         document.getElementById('goal-total').innerText = goalT;
-        
         let pTotal = Math.min((total/goalT)*100, 100);
         document.getElementById('bar-total').style.width = pTotal + '%';
         document.getElementById('percent-total').innerText = Math.round(pTotal) + '%';
-        
-        // Cambio de color Málaga Total
-        if (total >= goalT) {
-            document.getElementById('container-total').classList.add('goal-reached');
-        } else {
-            document.getElementById('container-total').classList.remove('goal-reached');
-        }
+        if (total >= goalT) document.getElementById('container-total').classList.add('goal-reached');
 
-        // --- 3. Equipos ---
-        const m1 = parseInt(rows[1][6]) || 0;
-        const gM1 = parseInt(rows[2][7]) || 1;
-        const m3 = parseInt(rows[2][6]) || 0;
-        const gM3 = parseInt(rows[3][7]) || 1;
-
+        // 3. Equipos
         // M1
-        document.getElementById('m1-val').innerText = m1;
+        const vM1 = parseInt(data.m1.valor) || 0;
+        const gM1 = parseInt(data.m1.objetivo) || 1;
+        document.getElementById('m1-val').innerText = vM1;
         document.getElementById('goal-m1').innerText = gM1;
-        document.getElementById('bar-m1').style.width = Math.min((m1/gM1)*100, 100) + '%';
-        if (m1 >= gM1) document.getElementById('unit-m1').classList.add('goal-reached');
-        else document.getElementById('unit-m1').classList.remove('goal-reached');
+        document.getElementById('bar-m1').style.width = (vM1/gM1*100) + '%';
+        if (vM1 >= gM1) document.getElementById('unit-m1').classList.add('goal-reached');
 
         // M3
-        document.getElementById('m3-val').innerText = m3;
+        const vM3 = parseInt(data.m3.valor) || 0;
+        const gM3 = parseInt(data.m3.objetivo) || 1;
+        document.getElementById('m3-val').innerText = vM3;
         document.getElementById('goal-m3').innerText = gM3;
-        document.getElementById('bar-m3').style.width = Math.min((m3/gM3)*100, 100) + '%';
-        if (m3 >= gM3) document.getElementById('unit-m3').classList.add('goal-reached');
-        else document.getElementById('unit-m3').classList.remove('goal-reached');
+        document.getElementById('bar-m3').style.width = (vM3/gM3*100) + '%';
+        if (vM3 >= gM3) document.getElementById('unit-m3').classList.add('goal-reached');
 
-    } catch (e) { console.error(e); }
+    } catch (e) { console.error("Error:", e); }
 }
 
-setInterval(updateDashboard, 3000);
+setInterval(updateDashboard, 30000);
 updateDashboard();
 </script>
 </body>
